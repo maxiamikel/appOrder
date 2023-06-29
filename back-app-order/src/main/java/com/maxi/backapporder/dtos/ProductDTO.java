@@ -7,6 +7,7 @@ public class ProductDTO {
     private Long id;
     private String name;
     private Double price;
+    private Integer stock;
 
     public ProductDTO() {
     }
@@ -15,6 +16,15 @@ public class ProductDTO {
         this.id = obj.getId();
         this.name = obj.getName();
         this.price = obj.getPrice();
+        this.stock = obj.getStock();
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public Long getId() {

@@ -1,0 +1,13 @@
+SELECT products.stock, order_item.quantity, order_item.sub_total, (products.stock - SUM(order_item.quantity)) as available,products.id, order_item.product_fk from products INNER JOIN order_item ON products.id = order_item.product_fk;
+
+SELECT (products.stock - SUM(order_item.quantity)) as available from products INNER JOIN order_item ON products.id = order_item.product_fk;
+
+UPDATE products SET products.stock = (SELECT (products.stock - SUM(order_item.quantity)) as available from products INNER JOIN order_item ON products.id = order_item.product_fk);
+
+UPDATE products SET products.stock = (SELECT (products.stock - SUM(order_item.quantity)) as available from products INNER JOIN order_item ON products.id = order_item.product_fk)WHERE products.id = 1;
+
+
+
+SELECT products.stock - SUM(order_item.quantity) as available from products INNER JOIN order_item ON products.id = order_item.product_fk WHERE products.id = 1 GROUP by order_item.product_fk;
+
+SELECT products.stock - SUM(order_item.quantity) as available, SUM(order_item.quantity) AS ITENS from products INNER JOIN order_item ON products.id = order_item.product_fk WHERE products.id IN(1,2,3,4) GROUP by order_item.product_fk;

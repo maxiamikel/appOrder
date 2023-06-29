@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.maxi.backapporder.dtos.ClientDTO;
 import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.projections.ClientOrderJoin;
+import com.maxi.backapporder.projections.OrderOrderItemClientJoin;
 import com.maxi.backapporder.repositories.ClientRepository;
 import com.maxi.backapporder.services.exceptions.DataIntegityViolationException;
 import com.maxi.backapporder.services.exceptions.NoSuchElementException;
@@ -80,12 +81,17 @@ public class ClientService {
         if (list.size() > 0) {
             return list;
         } else {
-            throw new RuntimeException("Nao encontramos registros");
+            throw new NoSuchElementException("Nao encontramos registro pelo nome ["+name.toUpperCase()+"] informado");
         }
     }
 
     public List<ClientOrderJoin> findAllOrderByClientEmail(String email) {
         List<ClientOrderJoin> list = clientRepository.clientOrderJoin(email);
+        return list;
+    }
+
+    public List<OrderOrderItemClientJoin> findOrderOrderItemClientJoin(String email){
+        List<OrderOrderItemClientJoin> list = clientRepository.findOrderOrderItemClient(email);
         return list;
     }
 

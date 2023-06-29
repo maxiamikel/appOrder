@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.maxi.backapporder.services.exceptions.DataIntegityViolationException;
-import com.maxi.backapporder.services.exceptions.MethodArgumentNotValidException;
 import com.maxi.backapporder.services.exceptions.NoSuchElementException;
 
 @ControllerAdvice

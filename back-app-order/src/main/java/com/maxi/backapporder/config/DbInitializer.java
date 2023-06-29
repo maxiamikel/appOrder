@@ -1,6 +1,5 @@
 package com.maxi.backapporder.config;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.entities.Order;
 import com.maxi.backapporder.entities.OrderItem;
 import com.maxi.backapporder.entities.Product;
-import com.maxi.backapporder.enums.OrderStatus;
 import com.maxi.backapporder.repositories.ClientRepository;
 import com.maxi.backapporder.repositories.OrderItemRepository;
 import com.maxi.backapporder.repositories.OrderRepository;
@@ -40,19 +38,27 @@ public class DbInitializer {
         Client cli3 = new Client(null, "Marie Lucienne Maxi Voltaire", "lucienne@maxi.com");
         Client cli4 = new Client(null, "Benite Maxi", "benite@maxi.com");
 
-        Product pc = new Product(null, "Computer DELL AG987", 7800.00);
-        Product cel = new Product(null, "Samsung S20 PRO", 2000.00);
+        Product pc = new Product(null, "Computer DELL AG987",25, 7800.00);
+        Product cel = new Product(null, "Samsung S20 PRO",12, 2000.00);
+        Product mouse = new Product(null, "Samsung Light ",10, 120.00);
 
-        Order o1 = new Order(null, LocalDate.now(), OrderStatus.PAID, cli2);
-        Order o2 = new Order(null, LocalDate.now(), OrderStatus.PAID, cli2);
-        Order o3 = new Order(null, LocalDate.now(), OrderStatus.VELIVERED, cli1);
+        Order o1 = new Order(null,cli2);
+        Order o2 = new Order(null,cli2);
+        Order o3 = new Order(null,cli1);
 
         OrderItem i1 = new OrderItem(null, 1, 1000.0, pc, o1);
+        OrderItem i2 = new OrderItem(null, 3, 500.45, pc, o1);
+        OrderItem i3 = new OrderItem(null, 1, 500.45, pc, o3);
+        OrderItem i4 = new OrderItem(null, 6, 2500.05, cel, o3);
+        OrderItem i5 = new OrderItem(null, 2, 2500.05, cel, o3);
+        OrderItem i6 = new OrderItem(null, 1, 2500.05, cel, o3);  
+        OrderItem i7 = new OrderItem(null, 3, 2500.05, cel, o3);
+        OrderItem i8 = new OrderItem(null, 10, 2500.05, mouse, o1);
 
         cliRep.saveAll(Arrays.asList(cli1,cli2,cli3,cli4));
-        proRep.saveAll(Arrays.asList(pc, cel));
+        proRep.saveAll(Arrays.asList(pc, cel,mouse));
         ordRep.saveAll(Arrays.asList(o1,o2,o3));
-        iteRepo.saveAll(Arrays.asList(i1));
+        iteRepo.saveAll(Arrays.asList(i1,i2,i3,i4,i5,i6,i7,i8));
     }
     
 }

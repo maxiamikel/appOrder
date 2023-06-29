@@ -1,9 +1,12 @@
 package com.maxi.backapporder.dtos;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.entities.Order;
+import com.maxi.backapporder.entities.OrderItem;
 import com.maxi.backapporder.enums.OrderStatus;
 
 import jakarta.persistence.EnumType;
@@ -14,18 +17,23 @@ public class OrderDTO {
     private Long id;
 
     @JsonFormat(pattern = "dd/mm/yyy HH:mm")
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    private Client client;
+
+    private List<OrderItem> items;
 
     public OrderDTO() {
     }
 
     public OrderDTO(Order obj) {
         this.id = obj.getId();
-        this.orderDate = obj.getOrderDate();
         this.status = obj.getStatus();
+        this.client = obj.getClient();
+        this.items = obj.getItems();
     }
 
     public Long getId() {
@@ -36,11 +44,11 @@ public class OrderDTO {
         this.id = id;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -50,6 +58,18 @@ public class OrderDTO {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
     }
 
 }

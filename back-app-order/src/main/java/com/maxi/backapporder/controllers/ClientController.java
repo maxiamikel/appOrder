@@ -21,6 +21,7 @@ import com.maxi.backapporder.dtos.ClientDTO;
 import com.maxi.backapporder.dtos.ClientOrderJoinDTO;
 import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.projections.ClientOrderJoin;
+import com.maxi.backapporder.projections.OrderOrderItemClientJoin;
 import com.maxi.backapporder.services.ClientService;
 
 import jakarta.validation.Valid;
@@ -47,6 +48,12 @@ public class ClientController {
     @GetMapping(value = "/name/{name}")
     public ResponseEntity<?> findClientByName(@PathVariable String name) {
         java.util.List<Client> list = clientService.findByName(name);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/report/{email}")
+    public ResponseEntity<?> findorder(@PathVariable String email){
+        List<OrderOrderItemClientJoin> list = clientService.findOrderOrderItemClientJoin(email);
         return ResponseEntity.ok().body(list);
     }
 

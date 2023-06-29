@@ -20,15 +20,17 @@ public class Product implements Serializable {
 
     private String name;
     private Double price;
+    private Integer stock;
 
     public Product() {
         super();
     }
 
-    public Product(Long id, String name, Double price) {
+    public Product(Long id, String name,Integer stock, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.stock = stock;
     }
 
     public Long getId() {
@@ -53,6 +55,14 @@ public class Product implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     @Override

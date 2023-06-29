@@ -1,7 +1,7 @@
 package com.maxi.backapporder.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,10 @@ public class Order implements Serializable {
 
     //@Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd/mm/yyy HH:mm")
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
+
+    @JsonFormat(pattern = "dd/mm/yyy HH:mm")
+    private LocalDateTime modifyDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
@@ -44,17 +47,17 @@ public class Order implements Serializable {
     private List<OrderItem> items = new ArrayList<>();
 
     public Order() {
+        this.setOrderDate(LocalDateTime.now());
+        this.setStatus(OrderStatus.WAITTING);
+        this.setModifyDate(null);
     }
 
-    public Order(Long id, LocalDate orderDate, OrderStatus status, Client client) {
+    public Order(Long id,Client client) {
         this.id = id;
-        this.orderDate = orderDate;
-        this.status = status;
+        this.setOrderDate(LocalDateTime.now());
+        this.setStatus(OrderStatus.WAITTING);
+        this.setModifyDate(null);
         this.client = client;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
     public Long getId() {
@@ -65,11 +68,11 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -87,6 +90,14 @@ public class Order implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public LocalDateTime getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(LocalDateTime modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
     public List<OrderItem> getItems() {
