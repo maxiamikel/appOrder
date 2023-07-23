@@ -55,7 +55,11 @@ public class OrderService {
     public String finalizeOrder(Long id){
         Order obj = findById(id);
         return obj.getStatus().toString();
+    }
 
-
+    public Double getTotalOrder(Long id){
+        Order obj = findById(id);
+        Double total = obj.getTotal();
+        return total;
     }
 }

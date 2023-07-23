@@ -37,6 +37,10 @@ public class ClientService {
         return clientRepository.findAll(pageable);
     }
 
+    public List<Client> listarTodos(){
+        return clientRepository.findAllCli();
+    }
+
     private Client findExistsClientEmail(String email) {
         Client obj = clientRepository.findByEmail(email);
         if (obj != null) {
@@ -91,8 +95,13 @@ public class ClientService {
     }
 
     public List<OrderOrderItemClientJoin> findOrderOrderItemClientJoin(String email){
-        List<OrderOrderItemClientJoin> list = clientRepository.findOrderOrderItemClient(email);
-        return list;
+        List<?> mail = (List<?>) clientRepository.findByEmail(email);
+        if(mail.contains(email)){
+            List<OrderOrderItemClientJoin> list = clientRepository.findOrderOrderItemClient(email);
+            return list;
+        }else{
+            return null;
+        }
     }
 
 }

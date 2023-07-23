@@ -57,6 +57,12 @@ public class ClientController {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> listarAll(){
+        List<Client> list = clientService.listarTodos();
+        return ResponseEntity.ok().body(list);
+    }
+
     @PostMapping(value = "/new")
     public ResponseEntity<?> create(@Valid @RequestBody ClientDTO obj) {
         Client client = clientService.create(obj);

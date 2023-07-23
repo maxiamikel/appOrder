@@ -36,6 +36,12 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.findAll());
     }
 
+    @GetMapping(value = "/total/{id}")
+    public ResponseEntity<?> getTotal(@PathVariable Long id){
+        Double val = orderService.getTotalOrder(id);
+        return ResponseEntity.ok().body(val);
+    }
+
     @PostMapping(value = "/new")
     public ResponseEntity<?> create(@Valid @RequestBody OrderDTO obj) {
         Order order = orderService.create(obj);

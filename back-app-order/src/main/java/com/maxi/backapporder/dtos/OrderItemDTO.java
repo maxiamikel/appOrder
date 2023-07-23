@@ -21,7 +21,7 @@ public class OrderItemDTO {
     public OrderItemDTO(OrderItem obj) {
         this.id = obj.getId();
         this.quantity = obj.getQuantity();
-        this.price = obj.getPrice();
+        this.price = obj.getProduct().getPrice();
         this.product = obj.getProduct();
         this.order = obj.getOrder();
     }

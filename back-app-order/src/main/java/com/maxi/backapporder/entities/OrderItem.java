@@ -23,8 +23,8 @@ public class OrderItem implements Serializable {
     private Long id;
 
     private Integer quantity;
-    private Double price;
-    private Double subTotal = 0.0;
+    //private Double price;
+    //private Double subTotal = 0.0;
 
     @ManyToOne
     @JoinColumn(name = "product_fk")
@@ -38,13 +38,12 @@ public class OrderItem implements Serializable {
     public OrderItem() {
     }
 
-    public OrderItem(Long id, Integer quantity, Double price, Product product, Order order) {
+    public OrderItem(Long id, Integer quantity, Product product, Order order) {
         this.id = id;
         this.quantity = quantity;
-        this.price = price;
         this.product = product;
         this.order = order;
-        this.subTotal = subTotal();
+        //this.subTotal = getSbTotal();
     }
 
     public Long getId() {
@@ -63,14 +62,6 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -87,12 +78,8 @@ public class OrderItem implements Serializable {
         this.order = order;
     }
 
-    public Double subTotal() {
-        return price * quantity;
-    }
-
     public Double getSubTotal() {
-        return subTotal;
+        return this.getProduct().getPrice() * quantity;
     }
 
     @Override

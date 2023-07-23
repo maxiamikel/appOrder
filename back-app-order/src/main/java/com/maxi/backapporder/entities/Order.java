@@ -100,16 +100,20 @@ public class Order implements Serializable {
         this.modifyDate = modifyDate;
     }
 
+    public void addOrderItem(OrderItem obj){
+        this.items.add(obj);
+    }
     public List<OrderItem> getItems() {
         return items;
     }
 
-    public Double total(){
-        Double orderIremPrice = 0.0;
+    public Double getTotal(){
+        Double vTotal = 0.0;
         for (OrderItem orderItem : items) {
-            orderIremPrice += orderItem.getPrice();
+            //Double vParcial = orderItem.getPrice() * orderItem.getQuantity();
+            vTotal = vTotal + orderItem.getSubTotal();
         }
-        return orderIremPrice ;
+        return vTotal ;
     }
 
     @Override

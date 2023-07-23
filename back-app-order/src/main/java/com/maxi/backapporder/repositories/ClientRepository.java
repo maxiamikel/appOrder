@@ -12,6 +12,9 @@ import com.maxi.backapporder.projections.OrderOrderItemClientJoin;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
+    @Query(value = "select obj from Client obj")
+    List<Client> findAllCli();
+
     // @Query("select c.email from Client c where c.email :=email")
     Client findByEmail(String email);
 

@@ -38,23 +38,24 @@ public class DbInitializer {
         Client cli3 = new Client(null, "Marie Lucienne Maxi Voltaire", "lucienne@maxi.com");
         Client cli4 = new Client(null, "Benite Maxi", "benite@maxi.com");
 
-        Product pc = new Product(null, "Computer DELL AG987",25, 7800.00);
-        Product cel = new Product(null, "Samsung S20 PRO",12, 2000.00);
-        Product mouse = new Product(null, "Samsung Light ",10, 120.00);
+        Product pc = new Product(null, "Computer DELL AG987",25, 1000.0);
+        Product cel = new Product(null, "Samsung S20 PRO",12, 500.0);
+        Product mouse = new Product(null, "Samsung Light ",10, 120.0);
 
         Order o1 = new Order(null,cli2);
         Order o2 = new Order(null,cli2);
         Order o3 = new Order(null,cli1);
 
-        OrderItem i1 = new OrderItem(null, 1, 1000.0, pc, o1);
-        OrderItem i2 = new OrderItem(null, 3, 500.45, pc, o1);
-        OrderItem i3 = new OrderItem(null, 1, 500.45, pc, o3);
-        OrderItem i4 = new OrderItem(null, 6, 2500.05, cel, o3);
-        OrderItem i5 = new OrderItem(null, 2, 2500.05, cel, o3);
-        OrderItem i6 = new OrderItem(null, 1, 2500.05, cel, o3);  
-        OrderItem i7 = new OrderItem(null, 3, 2500.05, cel, o3);
-        OrderItem i8 = new OrderItem(null, 10, 2500.05, mouse, o1);
+        OrderItem i1 = new OrderItem(null, 1, pc, o1);
+        OrderItem i2 = new OrderItem(null, 3, pc, o1);
+        OrderItem i3 = new OrderItem(null, 1, pc, o3);
+        OrderItem i4 = new OrderItem(null, 6, cel, o3);
+        OrderItem i5 = new OrderItem(null, 2, cel, o2);
+        OrderItem i6 = new OrderItem(null, 1, cel, o2);  
+        OrderItem i7 = new OrderItem(null, 3, cel, o3);
+        OrderItem i8 = new OrderItem(null, 2, mouse, o1);
 
+        
         cliRep.saveAll(Arrays.asList(cli1,cli2,cli3,cli4));
         proRep.saveAll(Arrays.asList(pc, cel,mouse));
         ordRep.saveAll(Arrays.asList(o1,o2,o3));

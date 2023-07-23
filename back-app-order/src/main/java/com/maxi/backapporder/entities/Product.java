@@ -21,16 +21,19 @@ public class Product implements Serializable {
     private String name;
     private Double price;
     private Integer stock;
+    private Boolean active;
 
     public Product() {
         super();
+        this.active = true;
     }
 
-    public Product(Long id, String name,Integer stock, Double price) {
+    public Product(Long id, String name, Integer stock, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.active = true;
     }
 
     public Long getId() {
@@ -63,6 +66,14 @@ public class Product implements Serializable {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
