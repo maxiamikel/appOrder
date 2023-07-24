@@ -9,7 +9,6 @@ public class OrderItemDTO {
     private Long id;
 
     private Integer quantity;
-    private Double price;
 
     private Product product;
 
@@ -21,7 +20,6 @@ public class OrderItemDTO {
     public OrderItemDTO(OrderItem obj) {
         this.id = obj.getId();
         this.quantity = obj.getQuantity();
-        this.price = obj.getProduct().getPrice();
         this.product = obj.getProduct();
         this.order = obj.getOrder();
     }
@@ -40,14 +38,6 @@ public class OrderItemDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public Product getProduct() {

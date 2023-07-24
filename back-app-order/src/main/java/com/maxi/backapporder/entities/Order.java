@@ -29,7 +29,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@Temporal(TemporalType.TIMESTAMP)
+    // @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd/mm/yyy HH:mm")
     private LocalDateTime orderDate;
 
@@ -52,7 +52,7 @@ public class Order implements Serializable {
         this.setModifyDate(null);
     }
 
-    public Order(Long id,Client client) {
+    public Order(Long id, Client client) {
         this.id = id;
         this.setOrderDate(LocalDateTime.now());
         this.setStatus(OrderStatus.WAITTING);
@@ -100,20 +100,20 @@ public class Order implements Serializable {
         this.modifyDate = modifyDate;
     }
 
-    public void addOrderItem(OrderItem obj){
+    public void addOrderItem(OrderItem obj) {
         this.items.add(obj);
     }
+
     public List<OrderItem> getItems() {
         return items;
     }
 
-    public Double getTotal(){
+    public Double getTotal() {
         Double vTotal = 0.0;
         for (OrderItem orderItem : items) {
-            //Double vParcial = orderItem.getPrice() * orderItem.getQuantity();
             vTotal = vTotal + orderItem.getSubTotal();
         }
-        return vTotal ;
+        return vTotal;
     }
 
     @Override

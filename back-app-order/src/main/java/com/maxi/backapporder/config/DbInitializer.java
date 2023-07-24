@@ -38,7 +38,7 @@ public class DbInitializer {
         Client cli3 = new Client(null, "Marie Lucienne Maxi Voltaire", "lucienne@maxi.com");
         Client cli4 = new Client(null, "Benite Maxi", "benite@maxi.com");
 
-        Product pc = new Product(null, "Computer DELL AG987",25, 1000.0);
+        Product pc = new Product(null, "Computer DELL AG987",25, 1000.00);
         Product cel = new Product(null, "Samsung S20 PRO",12, 500.0);
         Product mouse = new Product(null, "Samsung Light ",10, 120.0);
 

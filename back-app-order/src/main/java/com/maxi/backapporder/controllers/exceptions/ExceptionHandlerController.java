@@ -38,6 +38,13 @@ public class ExceptionHandlerController {
         StandardError err = new StandardError(System.currentTimeMillis(), e.getMessage(), HttpStatus.CONFLICT.value());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
     }
+
+    //ConstraintViolationException
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<StandardError> constraintViolationException(ConstraintViolationException e){
+        StandardError err = new StandardError(System.currentTimeMillis(), e.getMessage(), HttpStatus.NO_CONTENT.value());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(err);
+    }
 }
 
 

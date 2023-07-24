@@ -30,7 +30,7 @@ public class OrderService {
 
    public Order findById(Long id) {
         Optional<Order> obj = orderRepository.findById(id);
-        return obj.orElseThrow(() -> new NoSuchElementException("O codigo [" + id + "] informado não foi encontrado"));
+        return obj.orElseThrow(() -> new NoSuchElementException("O codigo [" + id + "] informado não foi encontrado: "+ Order.class.getSimpleName()));
     } 
 
       public Page<Order> findAll() {

@@ -25,7 +25,7 @@ public class ProductService {
 
      public Product findById(Long id) {
         Optional<Product> obj = productRepository.findById(id);
-        return obj.orElseThrow(() -> new NoSuchElementException("O codigo [" + id + "] informado não foi encontrado"));
+        return obj.orElseThrow(() -> new NoSuchElementException("O codigo [" + id + "] informado não foi encontrado: " +Product.class.getSimpleName()));
     }
 
     public Page<Product> findAll() {

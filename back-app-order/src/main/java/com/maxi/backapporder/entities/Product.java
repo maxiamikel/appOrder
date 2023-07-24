@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -20,6 +21,7 @@ public class Product implements Serializable {
 
     private String name;
     private Double price;
+    @NotNull(message = "O stock -e obrigatorio")
     private Integer stock;
     private Boolean active;
 
@@ -74,6 +76,10 @@ public class Product implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void desactivateProduct(){
+        this.setActive(false);
     }
 
     @Override
