@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.maxi.backapporder.dtos.OrderDTO;
 import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.entities.Order;
+import com.maxi.backapporder.entities.OrderItem;
 import com.maxi.backapporder.repositories.OrderRepository;
 import com.maxi.backapporder.services.exceptions.NoSuchElementException;
 
@@ -42,6 +43,7 @@ public class OrderService {
         Client client = clientService.findById(obj.getClient().getId());
         Order newOrder = new Order(null, client);
         newOrder = orderRepository.saveAndFlush(newOrder);
+        //updateTotalOrderPrice(newOrder.getId());
         return newOrder;
     }
 
@@ -52,6 +54,11 @@ public class OrderService {
         return orderRepository.saveAndFlush(order);
     }
 
+    /*public void updateTotalOrderPrice(Long id){
+        Order obj = findById(id);
+        orderRepository.updateTotal(getTotalOrder(id),obj.getId());
+    }*/
+
     public String finalizeOrder(Long id){
         Order obj = findById(id);
         return obj.getStatus().toString();
@@ -59,7 +66,10 @@ public class OrderService {
 
     public Double getTotalOrder(Long id){
         Order obj = findById(id);
-        Double total = obj.getTotal();
+        Double total = 0.0;
+        for (OrderItem item : obj.getItems()) {
+            total += item.getSubTotal();
+        }
         return total;
     }
 }

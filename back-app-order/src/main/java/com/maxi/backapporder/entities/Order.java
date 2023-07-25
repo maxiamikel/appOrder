@@ -46,10 +46,13 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
+    private Double totalCust = this.getTotal();
+
     public Order() {
         this.setOrderDate(LocalDateTime.now());
         this.setStatus(OrderStatus.WAITTING);
         this.setModifyDate(null);
+        this.totalCust = 0.0;
     }
 
     public Order(Long id, Client client) {
@@ -58,6 +61,7 @@ public class Order implements Serializable {
         this.setStatus(OrderStatus.WAITTING);
         this.setModifyDate(null);
         this.client = client;
+        this.totalCust = 0.0;
     }
 
     public Long getId() {
@@ -114,6 +118,14 @@ public class Order implements Serializable {
             vTotal = vTotal + orderItem.getSubTotal();
         }
         return vTotal;
+    }
+
+    public Double getTotalCust() {
+        return totalCust;
+    }
+
+    public void setTotalCust(Double totalCust) {
+        this.totalCust = getTotal();
     }
 
     @Override
