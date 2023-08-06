@@ -10,10 +10,12 @@ import com.maxi.backapporder.entities.Client;
 import com.maxi.backapporder.entities.Order;
 import com.maxi.backapporder.entities.OrderItem;
 import com.maxi.backapporder.entities.Product;
+import com.maxi.backapporder.entities.User;
 import com.maxi.backapporder.repositories.ClientRepository;
 import com.maxi.backapporder.repositories.OrderItemRepository;
 import com.maxi.backapporder.repositories.OrderRepository;
 import com.maxi.backapporder.repositories.ProductRepository;
+import com.maxi.backapporder.repositories.UserRepository;
 
 @Configuration
 public class DbInitializer {
@@ -29,6 +31,9 @@ public class DbInitializer {
 
     @Autowired
     private OrderItemRepository iteRepo;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     public void initialize(){
@@ -55,11 +60,16 @@ public class DbInitializer {
         OrderItem i7 = new OrderItem(null, 3, cel, o3);
         OrderItem i8 = new OrderItem(null, 2, mouse, o1);
 
+        User u1 = new User(null, "Amikel Maxi","900.922.333-12", "amikel@maxi.com","UA-003", "44657678");
+        User u2 = new User(null, "Myrlande Louissaint Maxi","900.922.333-02", "amikel@maxi.com", "UA-002", "44657678");
+        User u3 = new User(null, "Jean Alberne Maxi","900.922.333-13", "amikel@maxi.com", "UA-001","4657678");
+
         
         cliRep.saveAll(Arrays.asList(cli1,cli2,cli3,cli4));
         proRep.saveAll(Arrays.asList(pc, cel,mouse));
         ordRep.saveAll(Arrays.asList(o1,o2,o3));
         iteRepo.saveAll(Arrays.asList(i1,i2,i3,i4,i5,i6,i7,i8));
+        userRepository.saveAll(Arrays.asList(u1,u2,u3));
     }
     
 }

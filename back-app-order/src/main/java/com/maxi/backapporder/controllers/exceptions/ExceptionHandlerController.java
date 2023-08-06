@@ -21,7 +21,7 @@ public class ExceptionHandlerController {
     //MethodArgumentTypeMismatchException
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<StandardError> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
-        StandardError err = new StandardError(System.currentTimeMillis(), "O ID informado é inválido.", HttpStatus.BAD_REQUEST.value());
+        StandardError err = new StandardError(System.currentTimeMillis(), "O ID informado é inválido. Informe o ID sem letre e nem caracter especial!", HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
