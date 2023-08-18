@@ -13,6 +13,9 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long>{
     @Query(nativeQuery = true, value = "SELECT SUM(quantity) FROM order_item WHERE product_fk IN(1,2,3,4) GROUP BY product_fk")
     List<?> orderListValues();
     
-     @Query("SELECT SUM(quantity) FROM OrderItem")
+    @Query("SELECT SUM(quantity) FROM OrderItem")
     BigDecimal findValorTotalSales();
+
+    @Query(nativeQuery=true, value = "SELECT SUM(quantity) FROM order_item WHERE product_fk = ?1")
+    Integer findTotalItemOrder( Long id);
 }

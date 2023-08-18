@@ -32,6 +32,8 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "order_fk")
     private Order order;
 
+    private double sTotal;
+
     public OrderItem() {
     }
 
@@ -40,6 +42,7 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
         this.product = product;
         this.order = order;
+        this.sTotal = getSubTotal();
     }
 
     public Long getId() {
@@ -54,6 +57,10 @@ public class OrderItem implements Serializable {
         return quantity;
     }
 
+    public double getsTotal() {
+        return sTotal;
+    }
+    
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }

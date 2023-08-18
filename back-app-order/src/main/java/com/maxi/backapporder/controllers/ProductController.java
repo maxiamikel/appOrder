@@ -50,4 +50,10 @@ public class ProductController {
         Product product = productService.update(id, obj);
         return ResponseEntity.ok().body(product);
     }
+
+    @GetMapping(value = "/stock/{id}")
+    public ResponseEntity<?>  findProductStock(@PathVariable Long id){
+        Integer stock = productService.findProductStock(id);
+        return ResponseEntity.ok().body(stock);
+    }
 }

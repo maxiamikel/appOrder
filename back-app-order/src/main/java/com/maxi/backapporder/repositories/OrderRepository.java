@@ -15,4 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "update orders set total_cust = val where id = id", nativeQuery= true)
     void updateTotal(Double val,Long id);
 
+    //@Query("UPDATE Order o SET L.content = :content WHERE EXISTS (SELECT T FROM QuestionGroupText T WHERE T.localizedText.id = L.id AND T.generatedId = :generatedId)")
+
 }

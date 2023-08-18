@@ -2,9 +2,9 @@ package com.maxi.backapporder.enums;
 
 public enum OrderStatus {
     WAITTING("Waitting"),
-    PAID("Paid"),
+    PROCESSING("Processing"),
     CANCELED("Canceled"),
-    VELIVERED("Delivered");
+    DELIVERED("Delivered");
 
     private String orderStatus;
 

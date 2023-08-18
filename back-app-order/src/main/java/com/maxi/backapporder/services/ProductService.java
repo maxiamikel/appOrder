@@ -40,6 +40,10 @@ public class ProductService {
         return newProduct;
     }
 
+    /*public int findTotalStock(Long id){
+        return productRepository.findTotalStock(id);
+    }*/
+
      public Product update(Long id, ProductDTO obj) {
         Product product = findById(id);
         product.setName(obj.getName());
@@ -47,4 +51,9 @@ public class ProductService {
         return productRepository.saveAndFlush(product);
     }
     
+
+    public Integer findProductStock(Long productId){
+        Integer stock = productRepository.findProductStock(productId);
+        return stock;
+    }
 }

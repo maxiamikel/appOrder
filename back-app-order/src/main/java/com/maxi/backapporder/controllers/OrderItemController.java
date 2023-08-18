@@ -44,4 +44,15 @@ public class OrderItemController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(newObj);
     }
+
+    @GetMapping("/ver/{id}")
+    public ResponseEntity<?> findTotalItemOrder(@PathVariable Long id){
+        return ResponseEntity.ok().body(orderItemService.findTotalItemOrder(id));
+    }
+
+    @GetMapping("/verify/{id}")
+    public ResponseEntity<?> verifyStock(@PathVariable Long id){
+        //return ResponseEntity.ok().body(orderItemService.veririfyStock(id));
+        return null;
+    }
 }

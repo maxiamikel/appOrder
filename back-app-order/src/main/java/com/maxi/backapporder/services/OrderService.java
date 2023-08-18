@@ -54,10 +54,10 @@ public class OrderService {
         return orderRepository.saveAndFlush(order);
     }
 
-    /*public void updateTotalOrderPrice(Long id){
+    public void updateTotalOrderPrice(Long id){
         Order obj = findById(id);
         orderRepository.updateTotal(getTotalOrder(id),obj.getId());
-    }*/
+    }
 
     public String finalizeOrder(Long id){
         Order obj = findById(id);

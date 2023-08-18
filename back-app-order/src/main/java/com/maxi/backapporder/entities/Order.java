@@ -46,13 +46,15 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
-    private Double totalCust = this.getTotal();
+    @OneToMany(mappedBy = "order")
+    private List<Payment> payments = new ArrayList<>();
+
+    private Double totalOrder;
 
     public Order() {
         this.setOrderDate(LocalDateTime.now());
         this.setStatus(OrderStatus.WAITTING);
         this.setModifyDate(null);
-        this.totalCust = 0.0;
     }
 
     public Order(Long id, Client client) {
@@ -61,7 +63,7 @@ public class Order implements Serializable {
         this.setStatus(OrderStatus.WAITTING);
         this.setModifyDate(null);
         this.client = client;
-        this.totalCust = 0.0;
+        this.totalOrder = this.getTotal();
     }
 
     public Long getId() {
@@ -76,12 +78,32 @@ public class Order implements Serializable {
         return orderDate;
     }
 
+    public Double getTotal() {
+        Double vTotal = 0.0;
+        for (OrderItem orderItem : items) {
+            vTotal = vTotal + orderItem.getSubTotal();
+        }
+        return vTotal;
+    }
+
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
     public OrderStatus getStatus() {
         return status;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
     public void setStatus(OrderStatus status) {
@@ -110,22 +132,6 @@ public class Order implements Serializable {
 
     public List<OrderItem> getItems() {
         return items;
-    }
-
-    public Double getTotal() {
-        Double vTotal = 0.0;
-        for (OrderItem orderItem : items) {
-            vTotal = vTotal + orderItem.getSubTotal();
-        }
-        return vTotal;
-    }
-
-    public Double getTotalCust() {
-        return totalCust;
-    }
-
-    public void setTotalCust(Double totalCust) {
-        this.totalCust = getTotal();
     }
 
     @Override
