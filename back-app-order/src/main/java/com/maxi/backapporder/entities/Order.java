@@ -66,6 +66,10 @@ public class Order implements Serializable {
         this.totalOrder = this.getTotal();
     }
 
+    public void setTotalOrder(Double totalOrder) {
+        this.totalOrder = totalOrder;
+    }
+
     public Long getId() {
         return id;
     }
@@ -132,6 +136,10 @@ public class Order implements Serializable {
 
     public List<OrderItem> getItems() {
         return items;
+    }
+
+    public Double getTotalOrder() {
+        return totalOrder;
     }
 
     @Override

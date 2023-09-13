@@ -1,8 +1,8 @@
 package com.maxi.backapporder.enums;
 
 public enum PaymentStatus {
-    PENDING("Pending"),
-    PAID("Paid");
+    CANCEL("Cancel"),
+    OK("Ok");
 
     private String paymentStatus;
 

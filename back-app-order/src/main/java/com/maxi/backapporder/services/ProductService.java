@@ -56,4 +56,8 @@ public class ProductService {
         Integer stock = productRepository.findProductStock(productId);
         return stock;
     }
+
+    public void  stockUpdate(Integer val, Long productId){
+        productRepository.stockUpdate(val, productId);
+    }
 }

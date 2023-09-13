@@ -40,7 +40,7 @@ public class PaymentService {
     public Payment create(PaymentCreateDTO obj){
         Order order = orderService.findById(obj.getOrder().getId());
         Payment payment = new Payment(null, order, obj.getAmount());
-        payment.setPaymentStatus(PaymentStatus.PAID);
+        payment.setPaymentStatus(PaymentStatus.OK);
         return paymentRepository.save(payment);
     }
     

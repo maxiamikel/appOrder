@@ -35,7 +35,7 @@ public class Payment {
     public Payment() {
         this.date = LocalDate.now();
         this.time = LocalTime.now();
-        this.paymentStatus = PaymentStatus.PAID;
+        this.paymentStatus = PaymentStatus.OK;
     }
 
     public Payment(Long id, Order order, double amount) {

@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.maxi.backapporder.dtos.OrderItemDTO;
@@ -43,16 +41,20 @@ public class OrderItemService {
     }
 
     public Integer veririfyStock(Long id, Integer qty){
-        productService.findById(id);
         
+        productService.findById(id);
+
         Integer dispoProduct = productService.findProductStock(id);
+
         Integer totalSelleded = orderItemRepository.findTotalItemOrder(id);
-        Integer stock = 0;
-        if(dispoProduct > totalSelleded+qty){
+        if(totalSelleded == null){
+            totalSelleded =0;
+        }
+        Integer stock = dispoProduct - totalSelleded;
+        if(stock >= qty){
             return dispoProduct-totalSelleded;
-            //return stock;
         }else{
-            throw new NoSuchElementException("Não temos esse ["+qty+"] disponivel, tem  ["+ (dispoProduct-totalSelleded) +"] disponivel em estoque");
+            throw new NoSuchElementException("Não temos esse ["+qty+"] disponivel, tem  ["+ dispoProduct +"] disponivel em estoque");
         }
     } 
 
@@ -63,11 +65,13 @@ public class OrderItemService {
 
     public OrderItem create(OrderItemDTO obj){
         Product product = productService.findById(obj.getProduct().getId());
-            Order order = orderService.findById(obj.getOrder().getId());
-            OrderItem newOrderItem = new OrderItem(null, obj.getQuantity(), product, order);
-            this.veririfyStock(obj.getProduct().getId(), obj.getQuantity());
-            orderItemRepository.saveAndFlush(newOrderItem);
-            //orderService.updateTotalOrderPrice(order.getId());
-            return newOrderItem;
+        Integer stock = productService.findProductStock(product.getId());
+        Order order = orderService.findById(obj.getOrder().getId());
+        OrderItem newOrderItem = new OrderItem(null, obj.getQuantity(), product, order);
+        this.veririfyStock(product.getId(), obj.getQuantity());
+        productService.stockUpdate((stock - obj.getQuantity()), product.getId());
+        orderItemRepository.saveAndFlush(newOrderItem);
+        //orderService.updateTotalOrderPrice(order.getId());
+        return newOrderItem;
     }
 }

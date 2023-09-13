@@ -3,7 +3,6 @@ package com.maxi.backapporder.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.maxi.backapporder.entities.Client;
@@ -35,7 +34,7 @@ public class DbInitializer {
     @Autowired
     private UserRepository userRepository;
 
-    @Bean
+    //@Bean
     public void initialize(){
 
         Client cli1 = new Client(null, "Amikel Maxi", "mikel@maxi.com");
@@ -44,7 +43,7 @@ public class DbInitializer {
         Client cli4 = new Client(null, "Benite Maxi", "benite@maxi.com");
 
         Product pc = new Product(null, "Computer DELL AG987",25, 1000.00);
-        Product cel = new Product(null, "Samsung S20 PRO",12, 500.0);
+        Product cel = new Product(null, "Samsung S20 PRO",13, 500.0);
         Product mouse = new Product(null, "Samsung Light ",10, 120.0);
 
         Order o1 = new Order(null,cli2);
