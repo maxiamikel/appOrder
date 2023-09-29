@@ -7,14 +7,14 @@
       <form id="order_form">
         <div class="form_input">
           <label for="order">Order ID</label>
-          <input type="text" name="order_id" v-model="order_id" id="order_id" />
+          <input type="text" name=""  id="" />
         </div>
         <div class="form_input">
-          <label for="order">Select the costumer</label>
-          <select name="costumer" id="costumer" v-model="costumer">
-            <option value="Amikel">Amikel</option>
-            <option value="Myrlande">Myrlande</option>
-            <option value="Rose Marie">Rose Marie</option>
+          <label for="">Select the costumer</label>
+          <select name="order" id="order" v-model="order">
+            <option value="">Select a costumer</option>
+            <option v-for="order in orders" :key="order.id"  :value="order.id">{{order.qty}}</option>
+            
           </select>
         </div>
         <div class="form_input">
@@ -31,11 +31,19 @@ export default {
   props: ["titulo"], 
   data() {
     return{
-        custumers:null,
-        orders:null,
-        id:null, 
-        costumer:null
+      orders: [],
+      order: null
     }
+  },
+  methods: {
+    async getOrders(){
+        const req = await fetch("http://localhost:8080/api/orders/");
+        const data = await req.json();
+         this.orders = data.orders;
+        console.log(data);
+    }
+  }, mounted(){
+    this.getOrders();
   }
 };
 </script>
